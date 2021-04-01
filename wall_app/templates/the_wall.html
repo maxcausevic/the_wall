@@ -25,7 +25,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Welcome {{user.first_name}}</a>
+                        <a class="nav-link" href="#">Welcome {{this_user.first_name}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Log Off</a>
@@ -55,10 +55,11 @@
                 </div>
             </form>
             {% for message in all_messages %}
-            <p>{{ message.content }}</p>
+            <p>{{ message.content }} - ({{ message.user_name.first_name}}-{{message.created_at}})</p>
             {%  for comment in message.comments.all %}
-                <p class="ml-3">{{ comment.content }}</p>
+                <p class="ml-3">{{ comment.content }} - ({{comment.user_name.first_name}} - {{comment.created_at}})</p>
             {% endfor %}
+
             <form action="/comment" method="post">
                 <div class="mb-3">
                     <input type="hidden" name="message_id" value="{{message.id}}">
